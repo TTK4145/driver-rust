@@ -23,7 +23,7 @@ impl Elevator {
     pub fn init(addr: &str, num_floors: u8) -> Result<Elevator> {
         Ok(Self {
             socket: Arc::new(Mutex::new(TcpStream::connect(addr)?)),
-            num_floors: num_floors,
+            num_floors,
         })
     }
 
@@ -62,13 +62,13 @@ impl Elevator {
         let mut sock = self.socket.lock().unwrap();
         sock.write(&mut buf).unwrap();
         sock.read(&mut buf).unwrap();
-        return buf[1] != 0;
+        buf[1] != 0
     }
 
     pub fn floor_sensor(&self) -> Option<u8> {
         let mut buf = [7, 0, 0, 0];
         let mut sock = self.socket.lock().unwrap();
-        sock.write(&mut buf).unwrap();
+        sock.write(&buf).unwrap();
         sock.read(&mut buf).unwrap();
         if buf[1] != 0 {
             Some(buf[2])
@@ -80,17 +80,17 @@ impl Elevator {
     pub fn stop_button(&self) -> bool {
         let mut buf = [8, 0, 0, 0];
         let mut sock = self.socket.lock().unwrap();
-        sock.write(&mut buf).unwrap();
+        sock.write(&buf).unwrap();
         sock.read(&mut buf).unwrap();
-        return buf[1] != 0;
+        buf[1] != 0
     }
 
     pub fn obstruction(&self) -> bool {
         let mut buf = [9, 0, 0, 0];
         let mut sock = self.socket.lock().unwrap();
-        sock.write(&mut buf).unwrap();
+        sock.write(&buf).unwrap();
         sock.read(&mut buf).unwrap();
-        return buf[1] != 0;
+        buf[1] != 0
     }
 }
 

@@ -29,14 +29,11 @@ pub fn call_buttons(elev: elev::Elevator, ch: cbc::Sender<CallButton>, period: t
 pub fn floor_sensor(elev: elev::Elevator, ch: cbc::Sender<u8>, period: time::Duration) {
     let mut prev = u8::MAX;
     loop {
-        match elev.floor_sensor() {
-            Some(f) => {
-                if f != prev {
-                    ch.send(f).unwrap();
-                    prev = f;
-                }
+        if let Some(f) = elev.floor_sensor() {
+            if f != prev {
+                ch.send(f).unwrap();
+                prev = f;
             }
-            None => (),
         }
         thread::sleep(period)
     }
