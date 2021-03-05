@@ -3,11 +3,8 @@ use std::time::*;
 
 use crossbeam_channel as cbc;
 
-mod elevio {
-    pub mod elev;
-    pub mod poll;
-}
-use elevio::elev as e;
+use driver_rust::elevio;
+use driver_rust::elevio::elev as e;
 
 fn main() -> std::io::Result<()> {
     let elev_num_floors = 4;
