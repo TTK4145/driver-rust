@@ -9,6 +9,10 @@ edition = "2018"
 [dependencies]
 crossbeam-channel = "0.5"
 
+[lib]
+name = "driver_rust"
+path = "src/main.rs"
+
 [[bin]]
 name = "driver-rust"
 path = "src/main.rs"
