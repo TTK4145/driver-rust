@@ -29,10 +29,5 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_BASH: true
-          VALIDATE_DOCKERFILE: true
-          VALIDATE_DOCKERFILE_HADOLINT: true
           VALIDATE_MARKDOWN: true
-          VALIDATE_SHELL_SHFMT: true
-          VALIDATE_YAML: true
           
